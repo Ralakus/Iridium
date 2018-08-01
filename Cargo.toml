@@ -5,3 +5,6 @@ authors = ["Mikhail <12schneide@gmail.com>"]
 
 [dependencies]
 rhai = "*"
+nalgebra = "*"
+specs = "*"
+rayon = "*"
