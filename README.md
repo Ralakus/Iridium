@@ -5,4 +5,4 @@
 ## Goals
 * Vulkan support
 * Create a Rhai standard library
-* Data orientated ECS
+* Create the core library

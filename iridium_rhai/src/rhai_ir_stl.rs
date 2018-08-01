@@ -1,6 +1,6 @@
-pub extern crate rhai;
 
-use self::rhai::RegisterFn;
+use super::rhai as rhai;
+use super::rhai::RegisterFn;
 use std::fmt::Display;
 
 fn rhai_print<T: Display>(text: T) -> () {
