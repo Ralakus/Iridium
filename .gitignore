@@ -1,3 +1,9 @@
 /target
 **/*.rs.bk
 Cargo.lock
+
+iridium_core/target
+iridium_core/Cargo.lock
+
+iridium_rhai/target
+iridium_rhai/Cargo.lock

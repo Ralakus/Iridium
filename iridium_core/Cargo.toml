@@ -1,0 +1,9 @@
+[package]
+name = "iridium_core"
+version = "0.1.0"
+authors = ["Mikhail <12schneide@gmail.com>"]
+
+[dependencies]
+nalgebra = "*"
+specs = "*"
+rayon = "*"

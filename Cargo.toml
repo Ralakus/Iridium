@@ -4,7 +4,5 @@ version = "0.1.0"
 authors = ["Mikhail <12schneide@gmail.com>"]
 
 [dependencies]
-rhai = "*"
-nalgebra = "*"
-specs = "*"
-rayon = "*"
+iridium_core = { path = "iridium_core", version = "*"}
+iridium_rhai = { path = "iridium_rhai", version = "*"}

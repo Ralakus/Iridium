@@ -1,0 +1,9 @@
+[package]
+name = "iridium_rhai"
+version = "0.1.0"
+authors = ["Mikhail <12schneide@gmail.com>"]
+
+[dependencies]
+rhai = "*"
+
+iridium_core = { path = "../iridium_core", version = "*" }
