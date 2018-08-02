@@ -6,3 +6,5 @@ authors = ["Mikhail <12schneide@gmail.com>"]
 [dependencies]
 iridium_core = { path = "../iridium_core", version = "*" }
 vulkano = "0.7"
+vulkano-win = "0.7"
+winit = "0.7"
