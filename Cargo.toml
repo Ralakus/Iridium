@@ -4,5 +4,6 @@ version = "0.1.0"
 authors = ["Mikhail <12schneide@gmail.com>"]
 
 [dependencies]
-iridium_core = { path = "iridium_core", version = "*"}
-iridium_rhai = { path = "iridium_rhai", version = "*"}
+iridium_core     = { path = "iridium_core", version = "*"}
+iridium_rhai     = { path = "iridium_rhai", version = "*"}
+iridium_graphics = { path = "iridium_graphics", version = "*" }
