@@ -53,18 +53,14 @@ mod test {
     #[test]
     fn state_test () {
         let mut state_manager = core::StateManager::new();
-        let test_state  = TestState{val1: 0};
+        let test_state = TestState {val1: 0};
 
         state_manager.register_state(test_state).expect("Error");
-
-        state_manager.set_state(&String::from("TestState")).expect("Error");
-
-        state_manager.awake_state().expect("Error");
+        state_manager.set_next_state(&String::from("TestState")).expect("Error");
+        state_manager.switch_to_next_state().expect("Error");
 
         state_manager.update_state(0.0032f32).expect("Error");
-
         state_manager.send_event(core::IridiumEvent::Close).expect("Error");
-
         state_manager.end_state().expect("Error");
 
     }

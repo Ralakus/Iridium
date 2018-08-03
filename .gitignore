@@ -7,3 +7,6 @@ iridium_core/Cargo.lock
 
 iridium_rhai/target
 iridium_rhai/Cargo.lock
+
+iridium_graphics/target
+iridium_graphics/Cargo.lock
