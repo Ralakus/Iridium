@@ -2,19 +2,18 @@ use super::na as na;
 use super::specs::prelude::*;
 use super::specs_hierarchy::Parent as HParent;
 
-
-#[derive(Debug, Copy, Clone)]
-pub struct Transfrom(pub na::geometry::Transform3<f32>);
-
-impl Transfrom {
-    pub fn new() -> Self {
-        Transfrom(na::geometry::Transform3::identity())
-    }
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub struct Transfrom {
+    pub local:  na::geometry::Transform3<f32>,
+    pub global: na::geometry::Transform3<f32>,
 }
 
 impl Default for Transfrom {
     fn default() -> Self {
-        Transfrom(na::geometry::Transform3::identity())
+        Transfrom {
+            local:  na::geometry::Transform3::identity(),
+            global: na::geometry::Transform3::identity()
+        }
     }
 }
 

@@ -4,5 +4,5 @@
 
 ## Goals
 * Vulkan support
-* Create a Rhai standard library
-* Create the core library
+* Raytrace renderer
+* Aesset file reader/parser
