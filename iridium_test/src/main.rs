@@ -1,6 +1,4 @@
-mod lib;
-use lib as iridium;
-
+extern crate iridium;
 
 struct TestState {
     val1: i32
