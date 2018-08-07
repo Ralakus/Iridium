@@ -7,3 +7,4 @@ authors = ["Mikhail <12schneide@gmail.com>"]
 iridium_core     = { path = "iridium_core", version = "*"}
 iridium_rhai     = { path = "iridium_rhai", version = "*"}
 iridium_graphics = { path = "iridium_graphics", version = "*" }
+iridium_audio    = { path = "iridium_audio", version = "*" }

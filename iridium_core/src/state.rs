@@ -5,11 +5,11 @@ use std::collections::HashMap;
 
 pub trait IridiumState {
 
-    fn awake (&mut self)             -> Result<(), IridiumError>;
-    fn update(&mut self, delta: f32) -> Result<(), IridiumError>;
-    fn end   (&mut self)             -> Result<(), IridiumError>;
+    fn awake (&mut self, shared_data: &mut Option<Box<std::any::Any>>)   -> Result<(), IridiumError>;
+    fn update(&mut self, delta: f32)                                     -> Result<(), IridiumError>;
+    fn end   (&mut self)                                                 -> Result<(), IridiumError>;
 
-    fn handle_event(&mut self, event: event::IridiumEvent) -> Result<(), IridiumError>;
+    fn handle_event(&mut self, event: event::IridiumEvent)               -> Result<(), IridiumError>;
 
     fn get_name(&self) -> String;
 
@@ -22,6 +22,7 @@ pub struct StateManager<'a> {
     pending_state: String,
     state_selected: bool,
     pending_state_change: bool,
+    shared_data: Option<Box<std::any::Any>>,
 }
 
 impl<'a> StateManager<'a> {
@@ -32,6 +33,7 @@ impl<'a> StateManager<'a> {
             pending_state: String::new(),
             state_selected: false,
             pending_state_change: false,
+            shared_data: None
         }
     }
 
@@ -60,7 +62,7 @@ impl<'a> StateManager<'a> {
     pub fn awake_state(&mut self) -> Result<(),  IridiumError> {
         if self.state_selected {
             if let Some(state) = self.state_map.get_mut(&self.current_state) {
-                match state.as_mut().awake() {
+                match state.as_mut().awake(&mut self.shared_data) {
                     Ok(_)  => (),
                     Err(e) => return Err(e),
                 }
@@ -136,6 +138,10 @@ impl<'a> StateManager<'a> {
         }
 
         Ok(())
+    }
+
+    pub fn set_shared_data(&mut self, data: Box<std::any::Any>) {
+        self.shared_data = Some(data);
     }
 
     

@@ -13,3 +13,6 @@ iridium_graphics/Cargo.lock
 
 iridium_test/target
 iridium_test/Cargo.lock
+
+iridium_audio/target
+iridium_audio/Cargo.lock
