@@ -1,11 +1,19 @@
 extern crate iridium;
 
+use iridium::audio::rodio as rodio;
+use std::fs::File;
+use std::io::BufReader;
+use rodio::Source;
+
+use std::io;
+use std::io::prelude::*;
+
 struct TestShared {
     val: i32
 }
 
 struct TestState {
-    val1: i32
+    val1: i32,
 }
 
 impl iridium::core::IridiumState for TestState {
@@ -62,5 +70,13 @@ fn main() {
     state_manager.update_state(0.0032f32).unwrap();
     state_manager.send_event(iridium::core::IridiumEvent::Close).unwrap();
     state_manager.end_state().unwrap();
+
+    let device = rodio::default_output_device().unwrap();
+
+    let file = File::open("T.ogg").unwrap();
+    let source = rodio::Decoder::new(BufReader::new(file)).unwrap();
+    rodio::play_raw(&device, source.convert_samples());
+
+    let _ = std::io::stdin().read(&mut [0u8]).unwrap();
 
 }
