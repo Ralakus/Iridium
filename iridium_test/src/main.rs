@@ -1,12 +1,9 @@
 extern crate iridium;
+extern crate serde_json;
 
 use iridium::audio::rodio as rodio;
 use std::fs::File;
 use std::io::BufReader;
-use rodio::Source;
-
-use std::io;
-use std::io::prelude::*;
 
 struct TestShared {
     val: i32
@@ -71,12 +68,32 @@ fn main() {
     state_manager.send_event(iridium::core::IridiumEvent::Close).unwrap();
     state_manager.end_state().unwrap();
 
+    let config_json = File::open("config.json").unwrap();
+    let json: serde_json::Value = serde_json::from_reader(config_json).unwrap();
+    let audio_file : String = format!("{}", json["audio file"].as_str().unwrap());
+
     let device = rodio::default_output_device().unwrap();
+    let sink = rodio::Sink::new(&device);
+    match File::open(audio_file.as_str()) {
+        Ok(file) => {
+            let source = rodio::Decoder::new(BufReader::new(file)).unwrap();
+            sink.append(source);
+        },
+        Err(e) => println!("Error opening {1}!\n{0}", e, audio_file.as_str())
+    }
 
-    let file = File::open("T.ogg").unwrap();
-    let source = rodio::Decoder::new(BufReader::new(file)).unwrap();
-    rodio::play_raw(&device, source.convert_samples());
+    let mut window = iridium::graphics::Window::new();
+    window.set_title(String::from("Iridium"));
 
-    let _ = std::io::stdin().read(&mut [0u8]).unwrap();
+    while window.is_valid() {
+        if let Err(e) = window.update() {
+            println!("Iridium error: {0}", e);
+        }
+        if sink.empty() {
+            if let Err(e) = window.close() { 
+                panic!("Error closing window! {0}", e);
+            }
+        }
+    }
 
 }

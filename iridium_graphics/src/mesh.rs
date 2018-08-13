@@ -20,6 +20,15 @@ impl Mesh {
             interleaved_data: Vec::new(),
         }
     }
+
+    pub fn new_default() -> Self {
+        Mesh {
+            vertices        : Vec::new(),
+            normals         : Vec::new(),
+            texture_coords  : Vec::new(),
+            interleaved_data: Vec::new(),
+        }
+    }
 }
 
 impl Mesh {
