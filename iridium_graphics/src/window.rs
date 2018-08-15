@@ -37,9 +37,10 @@ impl Window {
                     match event {
 
                         winit::Event::WindowEvent {
-                        event: winit::WindowEvent::CloseRequested,
-                        ..
+                            event: winit::WindowEvent::CloseRequested,
+                            ..
                         } => temp_valid = false,
+
                         _ => (),
 
                     }

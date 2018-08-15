@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+#![allow(unused_imports)]
 use super::components as components;
 use super::specs as specs;
 use specs::prelude::*;
@@ -11,7 +13,7 @@ impl<'a> System<'a> for TransformSystem {
     );
 
     
-    fn run(&mut self, (mut trans, parent): Self::SystemData) {
+    fn run(&mut self, (_trans, _parent): Self::SystemData) {
 
     }
 

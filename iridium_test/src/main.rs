@@ -54,7 +54,10 @@ impl iridium::core::IridiumState for TestState {
 }
 
 fn main() {
-    let mut state_manager = iridium::core::StateManager::new();
+
+    let mut time = iridium::core::time::Time::new();
+
+    /*let mut state_manager = iridium::core::StateManager::new();
     let test_state  = TestState  {val1: 0};
     let test_shared = TestShared {val: -0};
 
@@ -80,19 +83,27 @@ fn main() {
             sink.append(source);
         },
         Err(e) => println!("Error opening {1}!\n{0}", e, audio_file.as_str())
-    }
+    }*/
 
     let mut window = iridium::graphics::Window::new();
     window.set_title(String::from("Iridium"));
 
+    let sleep_dur = std::time::Duration::new(0, 1000);
+
     while window.is_valid() {
         if let Err(e) = window.update() {
             println!("Iridium error: {0}", e);
-        }
+        }/*
         if sink.empty() {
             if let Err(e) = window.close() { 
                 panic!("Error closing window! {0}", e);
             }
+        }*/
+        std::thread::sleep(sleep_dur);
+        time.update();
+        if time.on_second() {
+            //window.set_title(format!("FPS: {0}",time.fps()));
+            println!("Delta: {0}, FPS: {1}",time.avg_delta(), time.avg_fps());
         }
     }
 
