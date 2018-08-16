@@ -99,7 +99,7 @@ fn main() {
                 panic!("Error closing window! {0}", e);
             }
         }*/
-        std::thread::sleep(sleep_dur);
+        //std::thread::sleep(sleep_dur);
         time.update();
         if time.on_second() {
             //window.set_title(format!("FPS: {0}",time.fps()));
