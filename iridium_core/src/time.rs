@@ -2,6 +2,99 @@
 use std::time::Instant;
 use std::time::Duration;
 
+pub fn duration_to_f64(d: Duration) -> f64 {
+    let seconds = d.as_secs() as f64;
+    let nanos = f64::from(d.subsec_nanos());
+    seconds + (nanos * 1e-9)
+}
+
+pub struct Timer {
+    running: bool, 
+    start: Instant,
+    stop: Instant,
+}
+
+impl Timer {
+    pub fn new() -> Self {
+        Timer {
+            running: false,
+            start: Instant::now(),
+            stop: Instant::now(),
+        }
+    }
+
+    pub fn start(&mut self) {
+        self.start = Instant::now();
+        self.running = true;
+    }
+
+    pub fn stop(&mut self){
+        self.stop = Instant::now();
+        self.running = false;
+    } 
+
+    pub fn elapsed(&mut self) -> Duration {
+        if self.running {
+            self.stop = Instant::now();
+        }
+
+        self.stop - self.start
+    }
+
+    pub fn is_running(&self) -> bool {
+        self.running
+    }
+}
+
+pub struct Time {
+    runtime_timer: Timer,
+    delta: Duration,
+    on_second_counter: Duration,
+    on_second: bool,
+    const_one_second: Duration,
+}
+
+impl Time {
+    pub fn new() -> Self {
+        Time {
+            runtime_timer: Timer::new(),
+            delta: Duration::new(0, 0),
+            on_second_counter: Duration::new(0, 0),
+            on_second: false,
+            const_one_second: Duration::new(1, 0),
+        }
+    }
+
+    pub fn update(&mut self) {
+
+        self.runtime_timer.stop();
+        self.delta = self.runtime_timer.elapsed();
+        self.runtime_timer.start();
+
+        self.on_second = false;
+
+        self.on_second_counter += self.delta;
+
+        if self.on_second_counter > self.const_one_second {
+            self.on_second = true;
+            self.on_second_counter = Duration::new(0, 0);
+        }
+
+
+    }
+
+    pub fn delta(&self) -> Duration {
+        self.delta
+    }
+
+    pub fn on_second(&self) -> bool {
+        self.on_second
+    }
+
+}
+
+
+/*
 pub struct Timer {
 
     running: bool,
@@ -291,4 +384,4 @@ impl NewTime {
     pub fn debug_delta(&self) -> Duration {
         self.elapsed_delta
     }
-}
+}*/

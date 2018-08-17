@@ -103,7 +103,7 @@ fn main() {
         time.update();
         if time.on_second() {
             //window.set_title(format!("FPS: {0}",time.fps()));
-            println!("Delta: {0}, FPS: {1}",time.avg_delta(), time.avg_fps());
+            println!("Delta: {0:?}", time.delta());
         }
     }
 
