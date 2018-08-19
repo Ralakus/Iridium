@@ -5,7 +5,7 @@ use iridium::audio::rodio as rodio;
 use std::fs::File;
 use std::io::BufReader;
 
-struct TestShared {
+/*struct TestShared {
     val: i32
 }
 
@@ -52,7 +52,7 @@ impl iridium::core::IridiumState for TestState {
         String::from("TestState")
     }
 }
-
+*/
 fn main() {
 
     let mut time = iridium::core::time::Time::new();
@@ -69,7 +69,7 @@ fn main() {
 
     state_manager.update_state(0.0032f32).unwrap();
     state_manager.send_event(iridium::core::IridiumEvent::Close).unwrap();
-    state_manager.end_state().unwrap();
+    state_manager.end_state().unwrap();*/
 
     let config_json = File::open("config.json").unwrap();
     let json: serde_json::Value = serde_json::from_reader(config_json).unwrap();
@@ -83,27 +83,26 @@ fn main() {
             sink.append(source);
         },
         Err(e) => println!("Error opening {1}!\n{0}", e, audio_file.as_str())
-    }*/
+    }
 
-    let mut window = iridium::graphics::Window::new();
-    window.set_title(String::from("Iridium"));
+    let mut window = iridium::graphics::Window::new(Some(1280u32), Some(720u32), Some(String::from("Iridium_test")));
 
-    let sleep_dur = std::time::Duration::new(0, 1000);
+    let _sleep_dur = std::time::Duration::new(0, 1000);
 
     while window.is_valid() {
         if let Err(e) = window.update() {
             println!("Iridium error: {0}", e);
-        }/*
+        }
         if sink.empty() {
             if let Err(e) = window.close() { 
                 panic!("Error closing window! {0}", e);
             }
-        }*/
+        }
         //std::thread::sleep(sleep_dur);
         time.update();
         if time.on_second() {
             //window.set_title(format!("FPS: {0}",time.fps()));
-            println!("Delta: {0:?}", time.delta());
+            println!("Delta: {0:?}, f64: {1}", time.delta(), iridium::core::duration_to_f64(time.delta()));
         }
     }
 

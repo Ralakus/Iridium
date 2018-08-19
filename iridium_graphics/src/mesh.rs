@@ -34,8 +34,11 @@ impl Mesh {
 impl Mesh {
     pub fn interleave(&mut self) {
         self.interleaved_data.clear();
+        let vertices_length = self.vertices.len();
+        self.normals.resize(vertices_length, na::Vector3::new(0_f32, 0_f32, 0_f32));
+        self.texture_coords.resize(vertices_length, na::Vector2::new(0_f32, 0_f32));
 
-        for i in 0..self.vertices.len() {
+        for i in 0..vertices_length {
 
             self.interleaved_data.push(self.vertices[i].x);
             self.interleaved_data.push(self.vertices[i].y);

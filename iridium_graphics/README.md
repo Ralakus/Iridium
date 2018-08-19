@@ -1,4 +1,4 @@
 # Graphics module for Iridium
 
 ## TODO:
-* ~~Choose a graphics library to use (gfx-rs or Vulkano)~~ Done, gfx-rs chosen
+* Choose a graphics library to use (gfx-rs or Vulkano) Ahh, I can't chose 

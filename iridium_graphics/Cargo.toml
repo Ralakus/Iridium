@@ -4,7 +4,8 @@ version = "0.1.0"
 authors = ["Mikhail <12schneide@gmail.com>"]
 
 [dependencies]
-glium = "*"
+vulkano = "*"
+vulkano-win = "*"
 winit = "*"
 
 iridium_core = { path = "../iridium_core", version = "*" }

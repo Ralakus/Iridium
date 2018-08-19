@@ -7,4 +7,5 @@ pub enum IridiumEvent {
     KeyHeld,
     MouseUp,
     MouseDown,
+    Data(Box<::std::any::Any>)
 }

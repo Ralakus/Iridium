@@ -5,6 +5,7 @@ pub extern crate nalgebra as na;
 extern crate specs_hierarchy;
 
 pub mod error;
+pub mod logging;
 pub mod components;
 pub mod systems;
 pub mod event;
@@ -17,4 +18,5 @@ pub use state::IridiumState;
 pub use state::StateManager;
 pub use time::Timer;
 pub use time::Time;
+pub use time::duration_to_f64;
 
